@@ -48,5 +48,13 @@ inline fun e(tag: String, message: String) = Log.e(tag, message)
 
 inline fun wtf(tag: String, message: String) = Log.wtf(tag, message)
 
+inline fun <T> logTiming(tag: String = "Timing", message: String, block: () -> T): T {
+    val startTime = System.currentTimeMillis()
+    val result = block()
+    val endTime = System.currentTimeMillis()
+    d(tag, "$message: ${endTime - startTime} ms")
+    return result
+}
+
 private val Any.tag: String
     get() = javaClass.simpleName
