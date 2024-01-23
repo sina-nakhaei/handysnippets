@@ -10,3 +10,21 @@ fun View.hide(gone: Boolean = true) {
 fun View.show() {
     visibility = View.VISIBLE
 }
+
+fun View.visible() = (this.visibility == View.VISIBLE)
+
+private const val DEFAULT_DEBOUNCE_TIME_MS = 300L
+
+fun View.setOnSafeClickListener(
+    debounceTimeMs: Long = DEFAULT_DEBOUNCE_TIME_MS,
+    onClick: (View) -> Unit
+) {
+    var lastClickTime = 0L
+    setOnClickListener { view ->
+        val currentTime = System.currentTimeMillis()
+        if (currentTime - lastClickTime >= debounceTimeMs) {
+            lastClickTime = currentTime
+            onClick(view)
+        }
+    }
+}
