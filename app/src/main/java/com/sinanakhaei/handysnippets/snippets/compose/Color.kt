@@ -1,4 +1,4 @@
-package com.sinanakhaei.handysnippets.snippets
+package com.sinanakhaei.handysnippets.snippets.compose
 
 import androidx.annotation.IntRange
 import androidx.compose.ui.graphics.Color
