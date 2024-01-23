@@ -16,9 +16,11 @@ import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothManager
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.content.RestrictionsManager
 import android.content.pm.LauncherApps
 import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.hardware.ConsumerIrManager
 import android.hardware.SensorManager
 import android.hardware.camera2.CameraManager
@@ -32,6 +34,7 @@ import android.media.projection.MediaProjectionManager
 import android.media.session.MediaSessionManager
 import android.media.tv.TvInputManager
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.net.nsd.NsdManager
 import android.net.wifi.WifiManager
 import android.net.wifi.p2p.WifiP2pManager
@@ -44,9 +47,11 @@ import android.os.Vibrator
 import android.os.storage.StorageManager
 import android.preference.PreferenceManager
 import android.print.PrintManager
+import android.provider.Settings
 import android.telecom.TelecomManager
 import android.telephony.TelephonyManager
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.accessibility.AccessibilityManager
@@ -242,3 +247,39 @@ inline fun Context.toast(@StringRes resId: Int): Toast =
 
 inline fun Context.longToast(@StringRes resId: Int): Toast =
     Toast.makeText(this, resId, Toast.LENGTH_LONG).apply { show() }
+
+fun Context.hideKeyboard(view: View) {
+    inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun Context.dpToPx(dp: Float): Int {
+    val scale = resources.displayMetrics.density
+    return (dp * scale + 0.5f).toInt()
+}
+
+fun Context.openAppSettings() {
+    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+    intent.data = Uri.fromParts("package", packageName, null)
+    startActivity(intent)
+}
+
+fun Context.openInBrowser(url: String) {
+    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+    startActivity(intent)
+}
+
+fun Context.isDarkModeEnabled(): Boolean {
+    val currentNightMode = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK
+    return (currentNightMode == Configuration.UI_MODE_NIGHT_YES)
+}
+
+fun Context.getClipboardText(): CharSequence? {
+    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    return clipboard.primaryClip?.getItemAt(0)?.text
+}
+
+fun Context.openDialer(phoneNumber: String) {
+    val intent = Intent(Intent.ACTION_DIAL)
+    intent.data = Uri.parse("tel:$phoneNumber")
+    startActivity(intent)
+}
