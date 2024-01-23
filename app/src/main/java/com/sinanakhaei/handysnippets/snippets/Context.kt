@@ -14,6 +14,7 @@ import android.app.admin.DevicePolicyManager
 import android.app.job.JobScheduler
 import android.appwidget.AppWidgetManager
 import android.bluetooth.BluetoothManager
+import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
@@ -273,9 +274,12 @@ fun Context.isDarkModeEnabled(): Boolean {
     return (currentNightMode == Configuration.UI_MODE_NIGHT_YES)
 }
 
-fun Context.getClipboardText(): CharSequence? {
-    val clipboard = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-    return clipboard.primaryClip?.getItemAt(0)?.text
+fun Context.pasteFromClipboard(): CharSequence? {
+    return clipboardManager?.primaryClip?.getItemAt(0)?.text
+}
+
+fun Context.copyToClipboard(text: String, label: String = "") {
+    clipboardManager?.setPrimaryClip(ClipData.newPlainText(label, text))
 }
 
 fun Context.openDialer(phoneNumber: String) {
