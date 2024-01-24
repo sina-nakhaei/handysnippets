@@ -21,14 +21,13 @@ fun Modifier.setIf(
 
 private const val DEFAULT_DEBOUNCE_TIME_MS = 300L
 
-@Composable
 fun Modifier.onSafeClick(
     debounceTimeMs: Long = DEFAULT_DEBOUNCE_TIME_MS,
     onClick: () -> Unit
-): Modifier {
+): Modifier = composed {
     var lastClickTime by remember { mutableStateOf(0L) }
 
-    return composed {
+    composed {
         clickable(
             interactionSource = remember { MutableInteractionSource() },
             indication = null

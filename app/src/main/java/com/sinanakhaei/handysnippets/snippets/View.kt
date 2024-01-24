@@ -2,16 +2,19 @@ package com.sinanakhaei.handysnippets.snippets
 
 import android.view.View
 
-fun View.hide(gone: Boolean = true) {
-    visibility = if (gone) View.GONE
-    else View.INVISIBLE
+fun View.hide() {
+    visibility = View.GONE
+}
+
+fun View.invisible() {
+    visibility = View.INVISIBLE
 }
 
 fun View.show() {
     visibility = View.VISIBLE
 }
 
-fun View.visible() = (this.visibility == View.VISIBLE)
+fun View.isVisible() = (this.visibility == View.VISIBLE)
 
 private const val DEFAULT_DEBOUNCE_TIME_MS = 300L
 
