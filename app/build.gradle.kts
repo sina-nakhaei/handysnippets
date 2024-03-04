@@ -1,7 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    id("maven-publish")
 }
 
 android {
@@ -67,14 +66,7 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    implementation(project(":handysnippets"))
 }
 
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = "com.sina.nakhaei"
-            artifactId = "handysnippets"
-            version = "1.0"
-        }
-    }
-}

@@ -1,7 +1,24 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("maven-publish")
 }
+
+
+afterEvaluate {
+    publishing {
+        publications {
+            create<MavenPublication>("release") {
+                from(components["release"])
+                groupId = "com.sina.nakhaei"
+                artifactId = "handysnippets"
+                version = "1.0"
+            }
+        }
+    }
+}
+
+
 
 android {
     namespace = "com.sinanakhaei.handysnippets"
@@ -30,6 +47,14 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
+    publishing {
+        multipleVariants {
+            allVariants()
+            withJavadocJar()
+        }
+    }
+
 }
 
 dependencies {
@@ -41,3 +66,4 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 }
+
