@@ -12,7 +12,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.sina.nakhaei"
                 artifactId = "handysnippets"
-                version = "1.0.2"
+                version = "1.0.3"
             }
         }
     }
@@ -22,7 +22,7 @@ afterEvaluate {
 
 android {
     namespace = "com.sinanakhaei.handysnippets"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         minSdk = 24
@@ -52,7 +52,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.4.3"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
 
     publishing {
