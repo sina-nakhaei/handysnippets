@@ -55,13 +55,6 @@ android {
         kotlinCompilerExtensionVersion = "1.5.8"
     }
 
-    publishing {
-        multipleVariants {
-            allVariants()
-            withJavadocJar()
-        }
-    }
-
 }
 
 dependencies {
