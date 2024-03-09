@@ -12,7 +12,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.sina.nakhaei"
                 artifactId = "handysnippets"
-                version = "1.0.6"
+                version = "1.0.7"
             }
         }
     }
@@ -41,11 +41,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
