@@ -12,7 +12,7 @@ afterEvaluate {
                 from(components["release"])
                 groupId = "com.sina.nakhaei"
                 artifactId = "handysnippets"
-                version = "1.0.3"
+                version = "1.0.6"
             }
         }
     }
